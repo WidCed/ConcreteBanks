@@ -1,0 +1,66 @@
+{
+    "namespace": "irestful",
+    "name": "concretebanks",
+    "externals": [
+                    "vendors://irestful/concretebooleans/dependencyinjection.json",
+                    "vendors://irestful/concreteobjectloaders/dependencyinjection.json",
+                    "vendors://irestful/concretestrings/dependencyinjection.json",
+                    "vendors://irestful/concreteuuids/dependencyinjection.json",
+                    "vendors://irestful/concreteuuids/dependencyinjection.json",
+                    "vendors://irestful/concreteobjectmetadatas/dependencyinjection.json",
+                    "vendors://irestful/concreteobjectmetadatarepresentations/dependencyinjection.json",
+                    "vendors://irestful/concretefilediskobjectmetadataservices/dependencyinjection.json",
+                    "vendors://irestful/concretefilediskobjectmetadatarepositories/dependencyinjection.json",
+                    "vendors://irestful/concreteentities/dependencyinjection.json"
+    ],
+    "configs": {
+        "builder_factory_classname": "ConcreteBanks\\Infrastructure\\Builders\\ConcreteBankBuilder",
+        "objectmetadata_directory": "./Compiled",
+        "compiler_objects_function": "ConcreteBanks\\Tests\\Helpers\\StaticBankHelper::getObjectWithSubObjects"
+    },
+    "objects": {
+        "builderfactory": {
+            "class": "ConcreteEntities\\Infrastructure\\Factories\\ConcreteEntityBuilderFactory",
+            "dependencies": [
+                                "irestful.concretebooleans.adapter",
+                                "irestful.concreteobjectloaders.adapter",
+                                "configs.builder_factory_classname"
+            ]
+        },
+        "irestful.concretebooleans.adapter" : {
+            "class": "ConcreteDependencyInjectionObjectPlaceHolders\\Infrastructure\\Objects\\ConcreteDependencyInjectionObjectPlaceHolder"
+        },
+        "irestful.concreteobjectloaders.adapter" : {
+            "class": "ConcreteDependencyInjectionObjectPlaceHolders\\Infrastructure\\Objects\\ConcreteDependencyInjectionObjectPlaceHolder"
+        },
+        "irestful.concretestrings.adapter" : {
+            "class": "ConcreteDependencyInjectionObjectPlaceHolders\\Infrastructure\\Objects\\ConcreteDependencyInjectionObjectPlaceHolder"
+        },
+        "irestful.concreteuuids.adapter" : {
+            "class": "ConcreteDependencyInjectionObjectPlaceHolders\\Infrastructure\\Objects\\ConcreteDependencyInjectionObjectPlaceHolder"
+        },
+        "irestful.concreteobjectmetadatas.adapter" : {
+            "class": "ConcreteDependencyInjectionObjectPlaceHolders\\Infrastructure\\Objects\\ConcreteDependencyInjectionObjectPlaceHolder"
+        },
+        "irestful.concreteobjectmetadatarepresentations.adapter" : {
+            "class": "ConcreteDependencyInjectionObjectPlaceHolders\\Infrastructure\\Objects\\ConcreteDependencyInjectionObjectPlaceHolder"
+        },
+        "irestful.concretefilediskobjectmetadataservices.service" : {
+            "class": "ConcreteDependencyInjectionObjectPlaceHolders\\Infrastructure\\Objects\\ConcreteDependencyInjectionObjectPlaceHolder"
+        }
+    },
+    "replace": {
+        "irestful.concreteobjectmetadatacompilerapplications.application": {
+            "class": "ConcreteObjectMetaDataCompilerApplications\\Infrastructure\\Applications\\ConcreteObjectMetaDataCompilerApplication",
+            "dependencies": ["irestful.concreteobjectmetadatas.adapter", "irestful.concreteobjectmetadatarepresentations.adapter", "irestful.concretefilediskobjectmetadataservices.service", "configs.compiler_objects_function"]
+        },
+        "irestful.concretefilediskobjectmetadataservices.service": {
+            "class": "ConcreteFileDiskObjectMetaDataServices\\Infrastructure\\Services\\ConcreteFileDiskObjectMetaDataService",
+            "dependencies": ["configs.objectmetadata_directory"]
+        },
+        "irestful.concretefilediskobjectmetadatarepositories.repository": {
+            "class": "ConcreteFileDiskObjectMetaDataRepositories\\Infrastructure\\Repositories\\ConcreteFileDiskObjectMetaDataRepository",
+            "dependencies": ["configs.objectmetadata_directory"]
+        }
+    }
+}
