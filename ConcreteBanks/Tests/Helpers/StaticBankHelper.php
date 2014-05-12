@@ -42,7 +42,7 @@ final class StaticBankHelper {
     }
     
     public static function getObjectWithSubObjects() {
-        return self::$object;
+        return array(self::$object);
     }
     
     private static function build() {
